@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кухня зсередини — Життя професійної кухні</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #142b3b;
+            --red: #853b42;
+            --olive: #85885c;
+            --cream: #f5f3ed;
+            --white: #ffffff;
+            --text: #30383d;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .top-line {
+            height: 5px;
+            background: linear-gradient(
+                to right,
+                var(--red) 0%,
+                var(--red) 35%,
+                var(--olive) 35%,
+                var(--olive) 65%,
+                var(--navy) 65%,
+                var(--navy) 100%
+            );
+        }
+
+        header {
+            background: var(--navy);
+            color: var(--white);
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            line-height: 1.2;
+        }
+
+        .logo span {
+            display: block;
+            color: #b9bd91;
+            font-size: 10px;
+            letter-spacing: 4px;
+            margin-top: 5px;
+            font-weight: 400;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        nav a {
+            font-size: 12px;
+            color: #e1e6e8;
+            transition: color 0.25s;
+        }
+
+        nav a:hover {
+            color: #c1c59b;
+        }
+
+        .hero {
+            min-height: 510px;
+            padding: 90px 8%;
+            background:
+                radial-gradient(
+                    ellipse at 85% 15%,
+                    rgba(133, 136, 92, 0.18),
+                    transparent 38%
+                ),
+                var(--cream);
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 780px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--red);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 30px;
+            height: 2px;
+            background: var(--red);
+        }
+
+        h1 {
+            color: var(--navy);
+            font-size: clamp(42px, 6vw, 76px);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            margin-bottom: 25px;
+        }
+
+        h1 span {
+            color: var(--red);
+        }
+
+        .hero-description {
+            max-width: 590px;
+            color: #62696b;
+            font-size: 16px;
+            line-height: 1.9;
+            margin-bottom: 32px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 14px 23px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: 0.25s;
+        }
+
+        .button-primary {
+            background: var(--red);
+            color: var(--white);
+        }
+
+        .button-primary:hover {
+            background: var(--navy);
+            transform: translateY(-2px);
+        }
+
+        .button-secondary {
+            border: 1px solid #c7c8bd;
+            color: var(--navy);
+        }
+
+        .button-secondary:hover {
+            border-color: var(--olive);
+            background: #eae9df;
+        }
+
+        .intro-strip {
+            background: var(--navy);
+            color: var(--white);
+            padding: 28px 8%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .intro-item {
+            padding-left: 17px;
+            border-left: 2px solid var(--olive);
+        }
+
+        .intro-item strong {
+            display: block;
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .intro-item p {
+            color: #c3ccd1;
+            font-size: 12px;
+        }
+
+        .section {
+            padding: 85px 8%;
+        }
+
+        .section-heading {
+            max-width: 650px;
+            margin-bottom: 40px;
+        }
+
+        .section-label {
+            color: var(--olive);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            color: var(--navy);
+            font-size: clamp(28px, 4vw, 40px);
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .section-heading > p {
+            color: #6a7070;
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .topic-card {
+            background: var(--white);
+            border: 1px solid #e7e5dc;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: 0.25s;
+        }
+
+        .topic-card:hover {
+            border-color: var(--olive);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(20, 43, 59, 0.06);
+        }
+
+        .topic-number {
+            color: var(--red);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 18px;
+        }
+
+        .topic-card h3 {
+            color: var(--navy);
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .topic-card p {
+            color: #6a7070;
+            font-size: 13px;
+            line-height: 1.8;
+            margin-bottom: 22px;
+        }
+
+        .topic-link {
+            color: var(--red);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-top: auto;
+        }
+
+        .topic-link span {
+            margin-left: 5px;
+            transition: margin 0.2s;
+        }
+
+        .topic-card:hover .topic-link span {
+            margin-left: 10px;
+        }
+
+        .quote-section {
+            background: #e9e8de;
+            padding: 65px 8%;
+            text-align: center;
+        }
+
+        .quote-mark {
+            color: var(--red);
+            font-size: 42px;
+            line-height: 1;
+            margin-bottom: 15px;
+        }
+
+        .quote-section h2 {
+            max-width: 720px;
+            margin: 0 auto 15px;
+            font-size: clamp(24px, 3vw, 34px);
+        }
+
+        .quote-section p {
+            color: #6a7070;
+            font-size: 13px;
+        }
+
+        .closing {
+            padding: 65px 8%;
+            background: var(--red);
+            color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .closing h2 {
+            color: var(--white);
+            font-size: clamp(24px, 3vw, 34px);
+            margin-bottom: 10px;
+        }
+
+        .closing p {
+            color: #f0dfe0;
+            font-size: 13px;
+            max-width: 500px;
+        }
+
+        .closing .button {
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            white-space: nowrap;
+        }
+
+        .closing .button:hover {
+            background: var(--white);
+            color: var(--red);
+        }
+
+        footer {
+            background: var(--navy);
+            color: #c3ccd1;
+            padding: 25px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            font-size: 11px;
+        }
+
+        footer strong {
+            color: var(--white);
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 760px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav {
+                gap: 15px;
+            }
+
+            .hero {
+                min-height: 440px;
+                padding-top: 65px;
+                padding-bottom: 65px;
+            }
+
+            .intro-strip {
+                grid-template-columns: 1fr;
+                gap: 22px;
+            }
+
+            .section {
+                padding-top: 65px;
+                padding-bottom: 65px;
+            }
+
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .closing {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            * {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-line"></div>
+
+    <header>
+        <a href="#home" class="logo">
+            КУХНЯ ЗСЕРЕДИНИ
+            <span>ПРОФЕСІЯ • ПОРЯДОК • СМАК</span>
+        </a>
+
+        <nav>
+            <a href="#home">Головна</a>
+            <a href="#about">Про проєкт</a>
+            <a href="#topics">Розділи</a>
+            <a href="#principles">Принципи роботи</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="hero" id="home">
+            <div class="hero-content">
+
+                <div class="eyebrow">Світ професійної гастрономії</div>
+
+                <h1>
+                    Що насправді відбувається <span>на кухні?</span>
+                </h1>
+
+                <p class="hero-description">
+                    За кожною стравою стоїть ціла система:
+                    команда професіоналів, чіткий розподіл обов'язків,
+                    злагоджені процеси та суворі правила гігієни.
+                    Запрошуємо зазирнути за лаштунки ресторану
+                    й дізнатися, як працює професійна кухня.
+                </p>
+
+                <div class="buttons">
+                    <a href="#topics" class="button button-primary">
+                        ДОСЛІДИТИ КУХНЮ
+                    </a>
+
+                    <a href="#about" class="button button-secondary">
+                        ПРО ПРОЄКТ
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="intro-strip" id="principles">
+
+            <div class="intro-item">
+                <strong>Команда</strong>
+                <p>Кожен знає свою роль та відповідає за результат.</p>
+            </div>
+
+            <div class="intro-item">
+                <strong>Організація</strong>
+                <p>Чіткі процеси допомагають працювати швидко й точно.</p>
+            </div>
+
+            <div class="intro-item">
+                <strong>Безпека</strong>
+                <p>Гігієна та контроль якості — щоденний пріоритет.</p>
+            </div>
+
+        </section>
+
+        <section class="section" id="about">
+
+            <div class="section-heading">
+                <div class="section-label">Про цей проєкт</div>
+
+                <h2>Кухня — це більше, ніж приготування їжі</h2>
+
+                <p>
+                    Професійна кухня нагадує злагоджений механізм.
+                    Шеф-кухар керує командою, кухарі працюють на своїх
+                    ділянках, а кожен етап — від приймання продуктів
+                    до подачі страви — має свої правила.
+                    Тут важливі не лише смак і майстерність, а й
+                    дисципліна, комунікація та відповідальність.
+                </p>
+            </div>
+
+            <div class="topic-grid" id="topics">
+
+                <a href="team.html" class="topic-card">
+                    <div class="topic-number">01 / КОМАНДА</div>
+                    <h3>Хто є хто на кухні?</h3>
+                    <p>
+                        Знайомство з шеф-кухарем, су-шефом,
+                        кухарями різних станцій та допоміжним персоналом.
+                        Хто керує процесом і за що відповідає кожен?
+                    </p>
+                    <div class="topic-link">
+                        ДІЗНАТИСЯ БІЛЬШЕ <span>→</span>
+                    </div>
+                </a>
+
+                <a href="workflow.html" class="topic-card">
+                    <div class="topic-number">02 / ПРОЦЕСИ</div>
+                    <h3>Як організована робота?</h3>
+                    <p>
+                        Підготовка до зміни, розподіл завдань,
+                        робота під час напливу замовлень і координація
+                        між кухнею та залом.
+                    </p>
+                    <div class="topic-link">
+                        ДОСЛІДИТИ ПРОЦЕС <span>→</span>
+                    </div>
+                </a>
+
+                <a href="sanitation.html" class="topic-card">
+                    <div class="topic-number">03 / ГІГІЄНА</div>
+                    <h3>Чистота та санітарні норми</h3>
+                    <p>
+                        Особиста гігієна працівників, чистота обладнання,
+                        правильне зберігання продуктів і запобігання
+                        перехресному забрудненню.
+                    </p>
+                    <div class="topic-link">
+                        ВИВЧИТИ ПРАВИЛА <span>→</span>
+                    </div>
+                </a>
+
+                <a href="quality.html" class="topic-card">
+                    <div class="topic-number">04 / ЯКІСТЬ</div>
+                    <h3>Шлях від продукту до страви</h3>
+                    <p>
+                        Приймання сировини, контроль свіжості,
+                        дотримання технології приготування та
+                        перевірка страви перед подачею.
+                    </p>
+                    <div class="topic-link">
+                        ДІЗНАТИСЯ ПРО ЯКІСТЬ <span>→</span>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <section class="quote-section">
+            <div class="quote-mark">“</div>
+
+            <h2>
+                Ідеальна страва починається з порядку,
+                професіоналізму та командної роботи.
+            </h2>
+
+            <p>Три основи ефективної професійної кухні</p>
+        </section>
+
+        <section class="closing">
+            <div>
+                <h2>Зазирнімо за лаштунки кухні</h2>
+
+                <p>
+                    Дізнайтеся, як побудована робота ресторану,
+                    хто створює страви та що допомагає команді
+                    підтримувати якість і безпеку щодня.
+                </p>
+            </div>
+
+            <a href="#topics" class="button">
+                ОБРАТИ РОЗДІЛ →
+            </a>
+        </section>
+
+    </main>
+
+    <footer>
+        <strong>КУХНЯ ЗСЕРЕДИНИ</strong>
+        <p>Навчальний проєкт про світ професійної кухні · 2026</p>
+    </footer>
+
+</body>
+</html>

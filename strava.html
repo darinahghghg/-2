@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Шлях від продукту до страви — Кухня зсередини</title>
+
+<style>
+:root {
+    --navy: #142b3b;
+    --red: #853b42;
+    --olive: #85885c;
+    --cream: #f5f3ed;
+    --white: #ffffff;
+    --text: #30383d;
+    --muted: #697071;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.7;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.top-line {
+    height: 5px;
+    background: linear-gradient(
+        to right,
+        var(--red) 0 35%,
+        var(--olive) 35% 65%,
+        var(--navy) 65% 100%
+    );
+}
+
+header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 20px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    line-height: 1.3;
+}
+
+.logo span {
+    display: block;
+    color: #b9bd91;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    margin-top: 5px;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+nav a {
+    color: #e1e6e8;
+    font-size: 12px;
+    transition: color .2s;
+}
+
+nav a:hover,
+nav a.active {
+    color: #c1c59b;
+}
+
+.hero {
+    padding: 65px 8% 75px;
+    background:
+        radial-gradient(
+            ellipse at 90% 10%,
+            rgba(133,136,92,.18),
+            transparent 40%
+        ),
+        var(--cream);
+}
+
+.breadcrumb {
+    color: #7a7e78;
+    font-size: 12px;
+    margin-bottom: 35px;
+}
+
+.breadcrumb a { color: var(--red); }
+
+.eyebrow {
+    color: var(--red);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 18px;
+}
+
+h1 {
+    color: var(--navy);
+    font-size: clamp(38px, 6vw, 68px);
+    line-height: 1.1;
+    letter-spacing: -2px;
+    max-width: 850px;
+    margin-bottom: 24px;
+}
+
+h1 span { color: var(--red); }
+
+.hero-description {
+    max-width: 670px;
+    color: #62696b;
+    font-size: 16px;
+    line-height: 1.9;
+    margin-bottom: 30px;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.button {
+    display: inline-block;
+    padding: 13px 22px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: .2s;
+}
+
+.button-primary {
+    background: var(--red);
+    color: var(--white);
+}
+
+.button-primary:hover { background: var(--navy); }
+
+.button-secondary {
+    border: 1px solid #c7c8bd;
+    color: var(--navy);
+}
+
+.button-secondary:hover { background: #e9e8de; }
+
+.info-strip {
+    background: var(--navy);
+    color: var(--white);
+    padding: 28px 8%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.info-item {
+    padding-left: 16px;
+    border-left: 2px solid var(--olive);
+}
+
+.info-item strong {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.info-item p {
+    color: #c3ccd1;
+    font-size: 12px;
+}
+
+.section { padding: 75px 8%; }
+
+.section-heading {
+    max-width: 700px;
+    margin-bottom: 38px;
+}
+
+.section-label {
+    color: var(--olive);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+}
+
+h2 {
+    color: var(--navy);
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1.25;
+    margin-bottom: 15px;
+}
+
+.section-heading p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.stages {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.stage {
+    display: flex;
+    gap: 20px;
+    background: var(--white);
+    padding: 26px;
+    border: 1px solid #e6e4da;
+    transition: .25s;
+}
+
+.stage:hover {
+    transform: translateY(-3px);
+    border-color: var(--olive);
+}
+
+.stage-number {
+    color: var(--red);
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    min-width: 32px;
+}
+
+.stage h3 {
+    color: var(--navy);
+    font-size: 19px;
+    margin-bottom: 8px;
+}
+
+.stage p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+.stage-tag {
+    display: inline-block;
+    color: var(--olive);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-top: 13px;
+}
+
+.dark-section {
+    background: var(--navy);
+    color: var(--white);
+}
+
+.dark-section h2 { color: var(--white); }
+
+.dark-section .section-heading p { color: #c3ccd1; }
+
+.dark-section .section-label { color: #b9bd91; }
+
+.quality-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 17px;
+}
+
+.quality-card {
+    padding: 23px;
+    border: 1px solid rgba(255,255,255,.18);
+    background: rgba(255,255,255,.035);
+}
+
+.quality-card h3 {
+    color: #c1c59b;
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+.quality-card p {
+    color: #d0d7db;
+    font-size: 12px;
+    line-height: 1.9;
+}
+
+.example-section { background: #e9e8de; }
+
+.example {
+    background: var(--white);
+    padding: 30px;
+    border-left: 3px solid var(--red);
+}
+
+.example h3 {
+    color: var(--navy);
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.example > p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.example-flow {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.example-step {
+    padding: 17px;
+    background: var(--cream);
+    border-top: 2px solid var(--olive);
+}
+
+.example-step span {
+    display: block;
+    color: var(--red);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.example-step strong {
+    display: block;
+    color: var(--navy);
+    font-size: 14px;
+    margin-bottom: 7px;
+}
+
+.example-step p {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.checklist {
+    list-style: none;
+    margin-top: 25px;
+}
+
+.checklist li {
+    background: var(--white);
+    padding: 13px 16px 13px 40px;
+    margin-bottom: 8px;
+    position: relative;
+    font-size: 13px;
+    color: #4c5557;
+}
+
+.checklist li::before {
+    content: "✓";
+    position: absolute;
+    left: 16px;
+    color: var(--olive);
+    font-weight: bold;
+}
+
+.notice {
+    margin-top: 25px;
+    padding: 20px 23px;
+    background: var(--white);
+    border-left: 3px solid var(--olive);
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.notice strong { color: var(--navy); }
+
+.closing {
+    background: var(--red);
+    color: var(--white);
+    padding: 55px 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.closing h2 {
+    color: var(--white);
+    margin-bottom: 10px;
+}
+
+.closing p {
+    color: #f0dfe0;
+    font-size: 13px;
+    max-width: 560px;
+}
+
+.closing .button {
+    border: 1px solid rgba(255,255,255,.7);
+    white-space: nowrap;
+}
+
+.closing .button:hover {
+    background: var(--white);
+    color: var(--red);
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 28px;
+    color: var(--red);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+footer {
+    background: var(--navy);
+    color: #c3ccd1;
+    padding: 24px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    font-size: 11px;
+}
+
+footer strong {
+    color: var(--white);
+    letter-spacing: 2px;
+}
+
+@media (max-width: 760px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .info-strip,
+    .stages {
+        grid-template-columns: 1fr;
+    }
+
+    .quality-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .example-flow {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .closing,
+    footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 430px) {
+    .example-flow { grid-template-columns: 1fr; }
+    .section { padding: 55px 7%; }
+    .hero { padding: 50px 7% 60px; }
+    .stage { padding: 21px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-line"></div>
+
+<header>
+    <a href="index.html" class="logo">
+        КУХНЯ ЗСЕРЕДИНИ
+        <span>ПРОФЕСІЯ • ПОРЯДОК • СМАК</span>
+    </a>
+
+    <nav>
+        <a href="index.html">Головна</a>
+        <a href="team.html">Хто на кухні?</a>
+        <a href="workflow.html">Робочі процеси</a>
+        <a href="sanitation.html">Санітарія</a>
+        <a href="quality.html" class="active">Якість страв</a>
+    </nav>
+</header>
+
+<main>
+
+<section class="hero">
+    <div class="breadcrumb">
+        <a href="index.html">Головна</a> /
+        Шлях від продукту до страви
+    </div>
+
+    <div class="eyebrow">04 / Якість та технологія</div>
+
+    <h1>
+        Від свіжого продукту<br>
+        до <span>ідеальної страви.</span>
+    </h1>
+
+    <p class="hero-description">
+        Перш ніж страва потрапить на стіл гостя, вона проходить
+        кілька важливих етапів: від приймання сировини та її
+        зберігання до підготовки, приготування й фінальної подачі.
+        На кожному кроці команда контролює якість, смак і безпеку.
+    </p>
+
+    <div class="buttons">
+        <a href="#stages" class="button button-primary">ПРОЙТИ ВСІ ЕТАПИ</a>
+        <a href="#example" class="button button-secondary">ПРИКЛАД НА ПРАКТИЦІ</a>
+    </div>
+</section>
+
+<section class="info-strip">
+    <div class="info-item">
+        <strong>Якісна сировина</strong>
+        <p>Усе починається з перевірки продуктів.</p>
+    </div>
+
+    <div class="info-item">
+        <strong>Точна технологія</strong>
+        <p>Рецептура та послідовність дій мають значення.</p>
+    </div>
+
+    <div class="info-item">
+        <strong>Контроль результату</strong>
+        <p>Готова страва має відповідати стандартам закладу.</p>
+    </div>
+</section>
+
+<section class="section" id="stages">
+    <div class="section-heading">
+        <div class="section-label">Виробничий процес</div>
+        <h2>Вісім кроків до готової страви</h2>
+        <p>
+            Організована робота допомагає підтримувати стабільну
+            якість і робити результат передбачуваним незалежно
+            від кількості замовлень.
+        </p>
+    </div>
+
+    <div class="stages">
+
+        <article class="stage">
+            <div class="stage-number">01</div>
+            <div>
+                <h3>Вибір постачальника</h3>
+                <p>
+                    Ресторан визначає вимоги до якості продуктів,
+                    умов доставки та супровідної документації.
+                    Надійне постачання є основою стабільного результату.
+                </p>
+                <span class="stage-tag">ПОСТАЧАННЯ</span>
+            </div>
+        </article>
+
+        <article class="stage">
+            <div class="stage-number">02</div>
+            <div>
+                <h3>Приймання продуктів</h3>
+                <p>
+                    Перевіряють стан упаковки, свіжість, маркування,
+                    терміни придатності й відповідність умовам
+                    транспортування. Невідповідні продукти не повинні
+                    потрапляти у виробництво.
+                </p>
+                <span class="stage-tag">ВХІДНИЙ КОНТРОЛЬ</span>
+            </div>
+        </article>
+
+        <article class="stage">
+            <div class="stage-number">03</div>
+            <div>
+                <h3>Правильне зберігання</h3>
+                <p>
+                    Продукти розміщують у відповідних умовах,
+                    розділяють за категоріями та захищають від
+                    забруднення. Дотримуються вимог до температури,
+                    маркування й термінів використання.
+                </p>
+                <span class="stage-tag">ЗБЕРІГАННЯ</span>
+            </div>
+        </article>
+
+        <article class="stage">
+            <div class="stage-number">04</div>
+            <div>
+                <h3>Підготовка інгредієнтів</h3>
+                <p>
+                    Кухарі очищають, миють, нарізають і порціонують
+                    продукти відповідно до технологічних карт.
+                    Робочі поверхні та інвентар використовують
+                    із дотриманням правил гігієни.
+                </p>
+                <span class="stage-tag">ЗАГОТІВЛЯ</span>
+            </div>
+        </article>
+
+        <article class="stage">
+            <div class="stage-number">05</div>
+            <div>
+                <h3>Приготування</h3>
+                <p>
+                    Інгредієнти обробляють відповідно до рецептури.
+                    Контролюють тривалість, температуру та інші
+                    параметри, важливі для конкретної страви.
+                </p>
+                <span class="stage-tag">ТЕХНОЛОГІЯ</span>
+            </div>
+        </article>
+
+        <article class="stage">
+            <div class="stage-number">06</div>
+            <div>
+                <h3>Контроль якості</h3>
+                <p>
+                    Перевіряють готовність, смак, консистенцію,
+                    температуру та відповідність установленим
+                    вимогам. У разі проблем діють за процедурами
+                    закладу, а не подають небезпечну страву.
+                </p>
+                <span class="stage-tag">ПЕРЕВІРКА</span>
+            </div>
+        </article>
+
+        <article class="stage">
+            <div class="stage-number">07</div>
+            <div>
+                <h3>Оформлення та подача</h3>
+                <p>
+                    Страву оформлюють відповідно до стандарту,
+                    перевіряють склад і комплектність замовлення
+                    та передають офіціанту або гостю.
+                </p>
+                <span class="stage-tag">ФІНАЛЬНИЙ ЕТАП</span>
+            </div>
+        </article>
+
+        <article class="stage">
+            <div class="stage-number">08</div>
+            <div>
+                <h3>Зворотний зв'язок</h3>
+                <p>
+                    Відгуки гостей допомагають оцінити результат,
+                    виявити повторювані проблеми й удосконалити
+                    рецептури, подачу та організацію роботи.
+                </p>
+                <span class="stage-tag">ВДОСКОНАЛЕННЯ</span>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+<section class="section dark-section">
+    <div class="section-heading">
+        <div class="section-label">Стандарти кухні</div>
+        <h2>Що визначає якість страви?</h2>
+        <p>
+            Стабільний результат не виникає випадково.
+            Він залежить від продуктів, професійних навичок,
+            дотримання технології та належної організації процесу.
+        </p>
+    </div>
+
+    <div class="quality-grid">
+        <article class="quality-card">
+            <h3>Смак і свіжість</h3>
+            <p>
+                Якісні інгредієнти, правильне поєднання смаків
+                та відповідність рецептурі.
+            </p>
+        </article>
+
+        <article class="quality-card">
+            <h3>Технологія приготування</h3>
+            <p>
+                Дотримання рецептури, часу, температури
+                та послідовності операцій.
+            </p>
+        </article>
+
+        <article class="quality-card">
+            <h3>Безпека продуктів</h3>
+            <p>
+                Гігієна, контроль ризиків, належне зберігання
+                та запобігання перехресному забрудненню.
+            </p>
+        </article>
+    </div>
+</section>
+
+<section class="section example-section" id="example">
+    <div class="section-heading">
+        <div class="section-label">Приклад на практиці</div>
+        <h2>Як народжується овочевий салат?</h2>
+        <p>
+            Розгляньмо простий приклад, щоб побачити,
+            як усі етапи поєднуються в єдиний процес.
+        </p>
+    </div>
+
+    <div class="example">
+        <h3>Від овочів до подачі</h3>
+        <p>
+            Кожен етап має свою мету, а правила безпеки
+            дотримуються протягом усього процесу.
+        </p>
+
+        <div class="example-flow">
+            <div class="example-step">
+                <span>КРОК 01</span>
+                <strong>Перевірка</strong>
+                <p>Овочі перевіряють на свіжість і відповідність вимогам.</p>
+            </div>
+
+            <div class="example-step">
+                <span>КРОК 02</span>
+                <strong>Підготовка</strong>
+                <p>Продукти миють та обробляють чистим інвентарем.</p>
+            </div>
+
+            <div class="example-step">
+                <span>КРОК 03</span>
+                <strong>Змішування</strong>
+                <p>Інгредієнти поєднують за рецептурою, додають заправку.</p>
+            </div>
+
+            <div class="example-step">
+                <span>КРОК 04</span>
+                <strong>Подача</strong>
+                <p>Салат оформлюють і передають гостю за стандартом закладу.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <div class="section-label">Контроль перед подачею</div>
+        <h2>Фінальна перевірка страви</h2>
+        <p>
+            Перед видачею кухар або відповідальний працівник
+            перевіряє, чи відповідає замовлення вимогам ресторану.
+        </p>
+    </div>
+
+    <ul class="checklist">
+        <li>Страва відповідає рецептурі та замовленню.</li>
+        <li>Використані інгредієнти належної якості.</li>
+        <li>Дотримані необхідні вимоги до приготування та температури.</li>
+        <li>Подача охайна, а посуд чистий і неушкоджений.</li>
+        <li>Враховані повідомлені гостем алергени та особливі вимоги.</li>
+        <li>Страва передається гостю без зайвих затримок.</li>
+    </ul>
+
+    <div class="notice">
+        <strong>Важливо:</strong>
+        вимоги до температури, зберігання та приготування
+        залежать від виду продукту й страви. Заклад має
+        керуватися чинними нормами та власними процедурами
+        безпечності харчових продуктів.
+    </div>
+
+    <a href="index.html" class="back-link">
+        ← Повернутися на головну сторінку
+    </a>
+</section>
+
+<section class="closing">
+    <div>
+        <h2>Тепер ви знаєте шлях страви</h2>
+        <p>
+            Команда, організовані процеси, чистота та контроль якості
+            разом створюють результат, який отримує гість.
+            Продовжуйте знайомство зі світом професійної кухні.
+        </p>
+    </div>
+
+    <a href="team.html" class="button">ПОЗНАЙОМИТИСЯ З КОМАНДОЮ →</a>
+</section>
+
+</main>
+
+<footer>
+    <strong>КУХНЯ ЗСЕРЕДИНИ</strong>
+    <p>Навчальний проєкт про світ професійної кухні · 2026</p>
+</footer>
+
+</body>
+</html>

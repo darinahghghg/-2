@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Як організована робота? — Кухня зсередини</title>
+
+    <style>
+        :root {
+            --navy: #142b3b;
+            --red: #853b42;
+            --olive: #85885c;
+            --cream: #f5f3ed;
+            --white: #ffffff;
+            --text: #30383d;
+            --muted: #697071;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .top-line {
+            height: 5px;
+            background: linear-gradient(
+                to right,
+                var(--red) 0 35%,
+                var(--olive) 35% 65%,
+                var(--navy) 65% 100%
+            );
+        }
+
+        header {
+            background: var(--navy);
+            color: var(--white);
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            line-height: 1.3;
+        }
+
+        .logo span {
+            display: block;
+            color: #b9bd91;
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 4px;
+            margin-top: 5px;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 22px;
+        }
+
+        nav a {
+            color: #e1e6e8;
+            font-size: 12px;
+            transition: color .2s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #c1c59b;
+        }
+
+        .hero {
+            padding: 70px 8% 80px;
+            background:
+                radial-gradient(
+                    ellipse at 90% 10%,
+                    rgba(133, 136, 92, .18),
+                    transparent 40%
+                ),
+                var(--cream);
+        }
+
+        .breadcrumb {
+            color: #7a7e78;
+            font-size: 12px;
+            margin-bottom: 35px;
+        }
+
+        .breadcrumb a {
+            color: var(--red);
+        }
+
+        .eyebrow {
+            color: var(--red);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            color: var(--navy);
+            font-size: clamp(40px, 6vw, 68px);
+            line-height: 1.08;
+            letter-spacing: -2px;
+            max-width: 850px;
+            margin-bottom: 24px;
+        }
+
+        h1 span {
+            color: var(--red);
+        }
+
+        .hero-description {
+            max-width: 660px;
+            color: #62696b;
+            font-size: 16px;
+            line-height: 1.9;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 13px 22px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: .2s;
+        }
+
+        .button-primary {
+            background: var(--red);
+            color: var(--white);
+        }
+
+        .button-primary:hover {
+            background: var(--navy);
+        }
+
+        .button-secondary {
+            border: 1px solid #c7c8bd;
+            color: var(--navy);
+        }
+
+        .button-secondary:hover {
+            background: #e9e8de;
+        }
+
+        .info-strip {
+            background: var(--navy);
+            color: var(--white);
+            padding: 28px 8%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .info-item {
+            padding-left: 16px;
+            border-left: 2px solid var(--olive);
+        }
+
+        .info-item strong {
+            display: block;
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .info-item p {
+            color: #c3ccd1;
+            font-size: 12px;
+        }
+
+        .section {
+            padding: 75px 8%;
+        }
+
+        .section-heading {
+            max-width: 680px;
+            margin-bottom: 38px;
+        }
+
+        .section-label {
+            color: var(--olive);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            color: var(--navy);
+            font-size: clamp(28px, 4vw, 40px);
+            line-height: 1.25;
+            margin-bottom: 15px;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .timeline-card {
+            display: flex;
+            gap: 20px;
+            padding: 27px;
+            background: var(--white);
+            border: 1px solid #e6e4da;
+            transition: .25s;
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--olive);
+        }
+
+        .step-number {
+            color: var(--red);
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            min-width: 30px;
+        }
+
+        .timeline-card h3 {
+            color: var(--navy);
+            font-size: 19px;
+            margin-bottom: 9px;
+        }
+
+        .timeline-card p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.85;
+        }
+
+        .timeline-card .tag {
+            display: inline-block;
+            margin-top: 14px;
+            color: var(--olive);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .dark-section {
+            background: var(--navy);
+            color: var(--white);
+        }
+
+        .dark-section h2 {
+            color: var(--white);
+        }
+
+        .dark-section .section-heading p {
+            color: #c3ccd1;
+        }
+
+        .dark-section .section-label {
+            color: #b9bd91;
+        }
+
+        .stations {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 15px;
+        }
+
+        .station {
+            padding: 23px;
+            border: 1px solid rgba(255,255,255,.17);
+            background: rgba(255,255,255,.035);
+        }
+
+        .station-number {
+            color: #b9bd91;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 13px;
+        }
+
+        .station h3 {
+            font-size: 17px;
+            margin-bottom: 9px;
+        }
+
+        .station p {
+            color: #c3ccd1;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .rush-section {
+            background: #e9e8de;
+        }
+
+        .rush-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+            align-items: start;
+        }
+
+        .rush-copy p {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            position: relative;
+            padding: 13px 15px 13px 36px;
+            margin-bottom: 8px;
+            background: var(--white);
+            font-size: 13px;
+            color: #4c5557;
+        }
+
+        .checklist li::before {
+            content: "✓";
+            position: absolute;
+            left: 14px;
+            color: var(--olive);
+            font-weight: 800;
+        }
+
+        .warning {
+            margin-top: 28px;
+            padding: 20px 23px;
+            background: var(--white);
+            border-left: 3px solid var(--red);
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .warning strong {
+            color: var(--navy);
+        }
+
+        .communication {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .communication-card {
+            padding: 23px;
+            border: 1px solid #e3e1d7;
+        }
+
+        .communication-card h3 {
+            color: var(--navy);
+            font-size: 17px;
+            margin-bottom: 9px;
+        }
+
+        .communication-card p {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .closing {
+            background: var(--red);
+            color: var(--white);
+            padding: 55px 8%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .closing h2 {
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .closing p {
+            color: #f0dfe0;
+            font-size: 13px;
+            max-width: 560px;
+        }
+
+        .closing .button {
+            border: 1px solid rgba(255,255,255,.7);
+            white-space: nowrap;
+        }
+
+        .closing .button:hover {
+            background: var(--white);
+            color: var(--red);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 28px;
+            color: var(--red);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        footer {
+            background: var(--navy);
+            color: #c3ccd1;
+            padding: 24px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            font-size: 11px;
+        }
+
+        footer strong {
+            color: var(--white);
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 760px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav {
+                gap: 14px;
+            }
+
+            .info-strip {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline {
+                grid-template-columns: 1fr;
+            }
+
+            .stations {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .rush-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .communication {
+                grid-template-columns: 1fr;
+            }
+
+            .closing {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 430px) {
+            .stations {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding-top: 50px;
+                padding-bottom: 55px;
+            }
+
+            .section {
+                padding-top: 55px;
+                padding-bottom: 55px;
+            }
+
+            .timeline-card {
+                padding: 21px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            * {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-line"></div>
+
+    <header>
+        <a href="index.html" class="logo">
+            КУХНЯ ЗСЕРЕДИНИ
+            <span>ПРОФЕСІЯ • ПОРЯДОК • СМАК</span>
+        </a>
+
+        <nav>
+            <a href="index.html">Головна</a>
+            <a href="team.html">Хто на кухні?</a>
+            <a href="workflow.html" class="active">Робочі процеси</a>
+            <a href="sanitation.html">Санітарія</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="hero" id="home">
+            <div>
+                <div class="breadcrumb">
+                    <a href="index.html">Головна</a> /
+                    <a href="team.html">Команда</a> /
+                    Робочі процеси
+                </div>
+
+                <div class="eyebrow">02 / Організація роботи</div>
+
+                <h1>
+                    Порядок за лаштунками.<br>
+                    <span>Швидкість у кожній дії.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Як ресторан встигає готувати десятки замовлень,
+                    не втрачаючи якості? Секрет — у правильній підготовці,
+                    продуманому розподілі завдань, координації команди
+                    та контролі на кожному етапі. Розгляньмо, як
+                    організована робота професійної кухні.
+                </p>
+
+                <div class="buttons">
+                    <a href="#stages" class="button button-primary">
+                        ПЕРЕГЛЯНУТИ ЕТАПИ
+                    </a>
+
+                    <a href="#rush" class="button button-secondary">
+                        РОБОТА В ГОДИНИ ПІК
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-strip">
+            <div class="info-item">
+                <strong>Планування</strong>
+                <p>Завдання та продукти готують заздалегідь.</p>
+            </div>
+
+            <div class="info-item">
+                <strong>Координація</strong>
+                <p>Команда працює за спільним планом і черговістю замовлень.</p>
+            </div>
+
+            <div class="info-item">
+                <strong>Контроль</strong>
+                <p>Якість, температура та безпека залишаються пріоритетом.</p>
+            </div>
+        </section>
+
+        <section class="section" id="stages">
+
+            <div class="section-heading">
+                <div class="section-label">Від початку до завершення</div>
+                <h2>Як проходить робоча зміна?</h2>
+                <p>
+                    У кожного закладу свої процедури, але більшість
+                    професійних кухонь працює за зрозумілою послідовністю.
+                    Вона допомагає не забувати важливі завдання
+                    й ефективно використовувати час.
+                </p>
+            </div>
+
+            <div class="timeline">
+
+                <article class="timeline-card">
+                    <div class="step-number">01</div>
+                    <div>
+                        <h3>Підготовка до відкриття</h3>
+                        <p>
+                            Команда перевіряє чистоту приміщення,
+                            справність обладнання, наявність продуктів
+                            і готовність робочих станцій. Шеф-кухар
+                            або відповідальний працівник розподіляє завдання.
+                        </p>
+                        <div class="tag">Планування зміни</div>
+                    </div>
+                </article>
+
+                <article class="timeline-card">
+                    <div class="step-number">02</div>
+                    <div>
+                        <h3>Приймання та зберігання продуктів</h3>
+                        <p>
+                            Під час отримання поставок перевіряють
+                            стан продуктів, супровідні документи,
+                            терміни придатності та відповідність умовам
+                            перевезення. Далі продукти розміщують
+                            у відповідних зонах зберігання.
+                        </p>
+                        <div class="tag">Контроль сировини</div>
+                    </div>
+                </article>
+
+                <article class="timeline-card">
+                    <div class="step-number">03</div>
+                    <div>
+                        <h3>Заготівля інгредієнтів</h3>
+                        <p>
+                            Кухарі миють, очищають, нарізають і
+                            порціонують продукти. Заготовки маркують,
+                            зберігають у належних умовах і готують
+                            до використання відповідно до рецептур.
+                        </p>
+                        <div class="tag">Підготовка продуктів</div>
+                    </div>
+                </article>
+
+                <article class="timeline-card">
+                    <div class="step-number">04</div>
+                    <div>
+                        <h3>Приймання замовлень</h3>
+                        <p>
+                            Замовлення надходять на кухню через систему
+                            обліку або інший прийнятий у закладі канал.
+                            Відповідальні працівники визначають черговість
+                            і передають інформацію потрібним станціям.
+                        </p>
+                        <div class="tag">Розподіл завдань</div>
+                    </div>
+                </article>
+
+                <article class="timeline-card">
+                    <div class="step-number">05</div>
+                    <div>
+                        <h3>Приготування страв</h3>
+                        <p>
+                            Кухарі виконують свої частини замовлення,
+                            дотримуються технологічних карт і узгоджують
+                            час приготування. За потреби су-шеф координує
+                            роботу та допомагає вирішувати проблеми.
+                        </p>
+                        <div class="tag">Робота станцій</div>
+                    </div>
+                </article>
+
+                <article class="timeline-card">
+                    <div class="step-number">06</div>
+                    <div>
+                        <h3>Перевірка та подача</h3>
+                        <p>
+                            Перед передаванням у зал перевіряють
+                            відповідність замовленню, готовність,
+                            температуру за встановленими вимогами
+                            та зовнішній вигляд страви.
+                        </p>
+                        <div class="tag">Контроль якості</div>
+                    </div>
+                </article>
+
+                <article class="timeline-card">
+                    <div class="step-number">07</div>
+                    <div>
+                        <h3>Прибирання протягом зміни</h3>
+                        <p>
+                            Робочі поверхні, інвентар і обладнання
+                            очищають у міру потреби та за встановленим
+                            графіком. Відходи прибирають, а чисті
+                            інструменти зберігають у визначених місцях.
+                        </p>
+                        <div class="tag">Чистота та безпека</div>
+                    </div>
+                </article>
+
+                <article class="timeline-card">
+                    <div class="step-number">08</div>
+                    <div>
+                        <h3>Завершення зміни</h3>
+                        <p>
+                            Персонал виконує заключне прибирання,
+                            перевіряє залишки, належно зберігає продукти,
+                            фіксує необхідну інформацію та готує
+                            робочі зони до наступної зміни.
+                        </p>
+                        <div class="tag">Підбиття підсумків</div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="section dark-section" id="stations">
+
+            <div class="section-heading">
+                <div class="section-label">Робочі зони</div>
+                <h2>Кожна станція має своє призначення</h2>
+                <p>
+                    Розподіл кухні на станції допомагає впорядкувати
+                    обладнання, інвентар і робочі завдання.
+                    Конкретна схема залежить від меню та розміру закладу.
+                </p>
+            </div>
+
+            <div class="stations">
+
+                <article class="station">
+                    <div class="station-number">ЗОНА 01</div>
+                    <h3>Заготівельна</h3>
+                    <p>
+                        Підготовка овочів, м'яса, риби та інших
+                        інгредієнтів із дотриманням правил розділення
+                        потоків і запобігання забрудненню.
+                    </p>
+                </article>
+
+                <article class="station">
+                    <div class="station-number">ЗОНА 02</div>
+                    <h3>Гаряча</h3>
+                    <p>
+                        Приготування супів, гарнірів, соусів,
+                        тушкованих, смажених та інших гарячих страв.
+                    </p>
+                </article>
+
+                <article class="station">
+                    <div class="station-number">ЗОНА 03</div>
+                    <h3>Холодна</h3>
+                    <p>
+                        Приготування салатів, холодних закусок
+                        та інших страв, які потребують контрольованих
+                        умов роботи й зберігання.
+                    </p>
+                </article>
+
+                <article class="station">
+                    <div class="station-number">ЗОНА 04</div>
+                    <h3>Кондитерська</h3>
+                    <p>
+                        Приготування десертів, кремів, тіста
+                        та оформлення кондитерських виробів.
+                    </p>
+                </article>
+
+                <article class="station">
+                    <div class="station-number">ЗОНА 05</div>
+                    <h3>Видача страв</h3>
+                    <p>
+                        Фінальна перевірка замовлень, оформлення
+                        подачі та передавання готових страв офіціантам.
+                    </p>
+                </article>
+
+                <article class="station">
+                    <div class="station-number">ЗОНА 06</div>
+                    <h3>Мийна</h3>
+                    <p>
+                        Миття посуду та інвентарю, підтримання
+                        чистоти й розділення чистих і брудних потоків.
+                    </p>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="section rush-section" id="rush">
+
+            <div class="section-heading">
+                <div class="section-label">Найскладніший момент</div>
+                <h2>Що відбувається в години пік?</h2>
+                <p>
+                    Коли одночасно надходить багато замовлень,
+                    особливо важливими стають спокій, чіткі команди
+                    та правильна організація робочого простору.
+                </p>
+            </div>
+
+            <div class="rush-grid">
+
+                <div class="rush-copy">
+                    <p>
+                        Кухарі не просто намагаються працювати швидше.
+                        Вони узгоджують послідовність дій, використовують
+                        підготовлені інгредієнти та стежать, щоб різні
+                        компоненти одного замовлення були готові вчасно.
+                    </p>
+
+                    <p>
+                        Су-шеф або інший відповідальний працівник
+                        допомагає контролювати черговість замовлень,
+                        розподіляти навантаження та підтримувати
+                        зв'язок між станціями й залом.
+                    </p>
+
+                    <p>
+                        Швидкість не повинна бути важливішою за безпеку:
+                        технологічні вимоги, гігієна та правильне
+                        приготування залишаються обов'язковими.
+                    </p>
+                </div>
+
+                <ul class="checklist">
+                    <li>Чітко розподіляти завдання між кухарями.</li>
+                    <li>Повідомляти про затримки та відсутність продуктів.</li>
+                    <li>Підтримувати порядок на робочих станціях.</li>
+                    <li>Перевіряти замовлення перед передаванням у зал.</li>
+                    <li>Дотримуватися температурних режимів і гігієни.</li>
+                    <li>Не допускати плутанини між різними замовленнями.</li>
+                </ul>
+
+            </div>
+
+            <div class="warning">
+                <strong>Головний принцип:</strong>
+                добре організована кухня — це не хаотична швидкість,
+                а злагоджена робота, де кожен знає своє завдання,
+                а якість і безпека не залежать від завантаженості.
+            </div>
+
+        </section>
+
+        <section class="section" id="communication">
+
+            <div class="section-heading">
+                <div class="section-label">Командна робота</div>
+                <h2>Три правила ефективної кухні</h2>
+                <p>
+                    Організація процесів допомагає уникати зайвих
+                    рухів, помилок і непорозумінь.
+                </p>
+            </div>
+
+            <div class="communication">
+
+                <article class="communication-card">
+                    <h3>01. Усе має своє місце</h3>
+                    <p>
+                        Інструменти, продукти та заготовки зберігаються
+                        у визначених місцях. Це заощаджує час
+                        і допомагає підтримувати порядок.
+                    </p>
+                </article>
+
+                <article class="communication-card">
+                    <h3>02. Усі знають план</h3>
+                    <p>
+                        Працівники розуміють свої завдання,
+                        черговість замовлень і порядок передавання
+                        інформації між станціями.
+                    </p>
+                </article>
+
+                <article class="communication-card">
+                    <h3>03. Безпека понад усе</h3>
+                    <p>
+                        Прибирання, гігієна, контроль продуктів
+                        і дотримання технологій є частиною роботи,
+                        а не завданнями лише на кінець зміни.
+                    </p>
+                </article>
+
+            </div>
+
+            <a href="team.html" class="back-link">
+                ← Повернутися до розділу «Хто на кухні?»
+            </a>
+
+        </section>
+
+        <section class="closing">
+            <div>
+                <h2>Порядок неможливий без чистоти</h2>
+                <p>
+                    Дізнайтеся, як професійні кухні організовують
+                    гігієну, зберігання продуктів і дотримання
+                    санітарних вимог.
+                </p>
+            </div>
+
+            <a href="sanitation.html" class="button">
+                САНІТАРІЯ ТА ГІГІЄНА →
+            </a>
+        </section>
+
+    </main>
+
+    <footer>
+        <strong>КУХНЯ ЗСЕРЕДИНИ</strong>
+        <p>Навчальний проєкт про світ професійної кухні · 2026</p>
+    </footer>
+
+</body>
+</html>

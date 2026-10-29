@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Хто на кухні? — Кухня зсередини</title>
+
+    <style>
+        :root {
+            --navy: #142b3b;
+            --red: #853b42;
+            --olive: #85885c;
+            --cream: #f5f3ed;
+            --white: #ffffff;
+            --text: #30383d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .top-line {
+            height: 5px;
+            background: linear-gradient(
+                to right,
+                var(--red) 0 35%,
+                var(--olive) 35% 65%,
+                var(--navy) 65% 100%
+            );
+        }
+
+        header {
+            background: var(--navy);
+            color: var(--white);
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            line-height: 1.3;
+        }
+
+        .logo span {
+            display: block;
+            color: #b9bd91;
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 4px;
+            margin-top: 5px;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 22px;
+        }
+
+        nav a {
+            color: #e1e6e8;
+            font-size: 12px;
+            transition: color 0.2s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #c1c59b;
+        }
+
+        .hero {
+            padding: 75px 8% 80px;
+            background:
+                radial-gradient(
+                    ellipse at 90% 10%,
+                    rgba(133, 136, 92, 0.18),
+                    transparent 40%
+                ),
+                var(--cream);
+        }
+
+        .breadcrumb {
+            font-size: 12px;
+            color: #7a7e78;
+            margin-bottom: 35px;
+        }
+
+        .breadcrumb a {
+            color: var(--red);
+        }
+
+        .eyebrow {
+            color: var(--red);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            color: var(--navy);
+            font-size: clamp(40px, 6vw, 68px);
+            line-height: 1.08;
+            letter-spacing: -2px;
+            max-width: 800px;
+            margin-bottom: 24px;
+        }
+
+        h1 span {
+            color: var(--red);
+        }
+
+        .hero p.description {
+            max-width: 650px;
+            color: #62696b;
+            font-size: 16px;
+            line-height: 1.9;
+        }
+
+        .intro-bar {
+            background: var(--navy);
+            color: var(--white);
+            padding: 28px 8%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .intro-item {
+            border-left: 2px solid var(--olive);
+            padding-left: 16px;
+        }
+
+        .intro-item strong {
+            display: block;
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .intro-item p {
+            font-size: 12px;
+            color: #c3ccd1;
+        }
+
+        .section {
+            padding: 75px 8%;
+        }
+
+        .section-heading {
+            max-width: 680px;
+            margin-bottom: 38px;
+        }
+
+        .section-label {
+            color: var(--olive);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            color: var(--navy);
+            font-size: clamp(27px, 4vw, 38px);
+            line-height: 1.25;
+            margin-bottom: 15px;
+        }
+
+        .section-heading p {
+            color: #697071;
+            font-size: 14px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .team-card {
+            background: var(--white);
+            padding: 28px;
+            border: 1px solid #e6e4da;
+            transition: transform 0.25s, border-color 0.25s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--olive);
+        }
+
+        .number {
+            color: var(--red);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 14px;
+        }
+
+        .team-card h3 {
+            color: var(--navy);
+            font-size: 21px;
+            margin-bottom: 4px;
+        }
+
+        .role {
+            color: var(--olive);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .team-card p {
+            color: #697071;
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        .duties {
+            list-style: none;
+            margin-top: 18px;
+            border-top: 1px solid #eeece5;
+            padding-top: 15px;
+        }
+
+        .duties li {
+            position: relative;
+            padding-left: 17px;
+            margin-bottom: 7px;
+            font-size: 12px;
+            color: #51595b;
+        }
+
+        .duties li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 9px;
+            width: 6px;
+            height: 6px;
+            background: var(--olive);
+        }
+
+        .workflow {
+            background: #e9e8de;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 20px;
+            margin-top: 35px;
+        }
+
+        .step {
+            border-top: 2px solid var(--olive);
+            padding-top: 18px;
+        }
+
+        .step span {
+            color: var(--red);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .step h3 {
+            color: var(--navy);
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .step p {
+            color: #697071;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .note {
+            margin-top: 30px;
+            padding: 22px 25px;
+            background: var(--white);
+            border-left: 3px solid var(--red);
+            color: #62696b;
+            font-size: 13px;
+        }
+
+        .note strong {
+            color: var(--navy);
+        }
+
+        .qualities {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 32px;
+        }
+
+        .quality {
+            padding: 23px;
+            border: 1px solid #e3e1d7;
+        }
+
+        .quality h3 {
+            color: var(--navy);
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .quality p {
+            color: #697071;
+            font-size: 12px;
+        }
+
+        .closing {
+            background: var(--red);
+            color: var(--white);
+            padding: 55px 8%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .closing h2 {
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .closing p {
+            color: #f0dfe0;
+            font-size: 13px;
+            max-width: 560px;
+        }
+
+        .button {
+            display: inline-block;
+            border: 1px solid rgba(255,255,255,0.7);
+            padding: 13px 20px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            white-space: nowrap;
+            transition: 0.2s;
+        }
+
+        .button:hover {
+            background: var(--white);
+            color: var(--red);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 25px;
+            color: var(--red);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        footer {
+            background: var(--navy);
+            color: #c3ccd1;
+            padding: 24px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            font-size: 11px;
+        }
+
+        footer strong {
+            color: var(--white);
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 760px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav {
+                gap: 14px;
+            }
+
+            .intro-bar {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .qualities {
+                grid-template-columns: 1fr;
+            }
+
+            .closing {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 430px) {
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding-top: 50px;
+                padding-bottom: 55px;
+            }
+
+            .section {
+                padding-top: 55px;
+                padding-bottom: 55px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            * {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-line"></div>
+
+    <header>
+        <a href="index.html" class="logo">
+            КУХНЯ ЗСЕРЕДИНИ
+            <span>ПРОФЕСІЯ • ПОРЯДОК • СМАК</span>
+        </a>
+
+        <nav>
+            <a href="index.html">Головна</a>
+            <a href="#team" class="active">Хто на кухні?</a>
+            <a href="workflow.html">Робочі процеси</a>
+            <a href="sanitation.html">Санітарія</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="hero" id="home">
+            <div>
+                <div class="breadcrumb">
+                    <a href="index.html">Головна</a> / Хто на кухні?
+                </div>
+
+                <div class="eyebrow">01 / Команда ресторану</div>
+
+                <h1>
+                    Кожен має свою роль.<br>
+                    <span>Один спільний результат.</span>
+                </h1>
+
+                <p class="description">
+                    Професійна кухня — це команда, у якій кожен працівник
+                    виконує конкретні завдання. Хтось керує процесами,
+                    хтось готує страви, а хтось стежить за підготовкою
+                    продуктів і чистотою робочого місця. Разом вони
+                    забезпечують швидкість, якість і безпеку.
+                </p>
+            </div>
+        </section>
+
+        <section class="intro-bar">
+            <div class="intro-item">
+                <strong>Чіткий розподіл обов'язків</strong>
+                <p>Кожен знає, за яку ділянку роботи відповідає.</p>
+            </div>
+
+            <div class="intro-item">
+                <strong>Командна взаємодія</strong>
+                <p>Працівники координують свої дії протягом зміни.</p>
+            </div>
+
+            <div class="intro-item">
+                <strong>Спільна відповідальність</strong>
+                <p>Результат залежить від роботи всієї команди.</p>
+            </div>
+        </section>
+
+        <section class="section" id="team">
+
+            <div class="section-heading">
+                <div class="section-label">Структура команди</div>
+                <h2>Хто за що відповідає?</h2>
+
+                <p>
+                    У великих ресторанах ролі зазвичай чітко розділені,
+                    а в невеликих закладах одна людина може виконувати
+                    кілька функцій. Розгляньмо основних учасників команди.
+                </p>
+            </div>
+
+            <div class="team-grid">
+
+                <article class="team-card">
+                    <div class="number">01 / КЕРІВНИЦТВО</div>
+                    <h3>Шеф-кухар</h3>
+                    <div class="role">Головний на кухні</div>
+
+                    <p>
+                        Керує кухнею, формує стандарти приготування,
+                        контролює якість страв і організовує роботу команди.
+                    </p>
+
+                    <ul class="duties">
+                        <li>Розробляє меню та рецептури.</li>
+                        <li>Розподіляє завдання між працівниками.</li>
+                        <li>Контролює якість і дотримання технологій.</li>
+                        <li>Організовує навчання персоналу.</li>
+                    </ul>
+                </article>
+
+                <article class="team-card">
+                    <div class="number">02 / КООРДИНАЦІЯ</div>
+                    <h3>Су-шеф</h3>
+                    <div class="role">Заступник шеф-кухаря</div>
+
+                    <p>
+                        Допомагає керувати зміною, координує кухарів
+                        і стежить, щоб замовлення готувалися вчасно.
+                    </p>
+
+                    <ul class="duties">
+                        <li>Організовує роботу під час зміни.</li>
+                        <li>Перевіряє готовність робочих станцій.</li>
+                        <li>Допомагає розв'язувати робочі питання.</li>
+                        <li>Контролює виконання встановлених стандартів.</li>
+                    </ul>
+                </article>
+
+                <article class="team-card">
+                    <div class="number">03 / ПРИГОТУВАННЯ</div>
+                    <h3>Кухарі станцій</h3>
+                    <div class="role">Фахівці своєї ділянки</div>
+
+                    <p>
+                        Кожен кухар відповідає за певну групу страв
+                        або технологічний процес відповідно до меню закладу.
+                    </p>
+
+                    <ul class="duties">
+                        <li>Готують страви за затвердженими рецептами.</li>
+                        <li>Стежать за якістю та подачею.</li>
+                        <li>Підтримують порядок на своїй станції.</li>
+                        <li>Дотримуються правил безпечної роботи з їжею.</li>
+                    </ul>
+                </article>
+
+                <article class="team-card">
+                    <div class="number">04 / ПІДГОТОВКА</div>
+                    <h3>Кухар заготівельної ділянки</h3>
+                    <div class="role">Підготовка продуктів</div>
+
+                    <p>
+                        Готує інгредієнти до подальшого приготування,
+                        щоб кухарі станцій могли швидко виконувати замовлення.
+                    </p>
+
+                    <ul class="duties">
+                        <li>Миє, чистить і нарізає продукти.</li>
+                        <li>Готує заготовки згідно з технологічними картами.</li>
+                        <li>Маркує та правильно зберігає заготовки.</li>
+                        <li>Запобігає перехресному забрудненню продуктів.</li>
+                    </ul>
+                </article>
+
+                <article class="team-card">
+                    <div class="number">05 / ЗАПАСИ</div>
+                    <h3>Комірник або відповідальний за продукти</h3>
+                    <div class="role">Приймання та зберігання</div>
+
+                    <p>
+                        У закладах, де передбачена така посада,
+                        працівник допомагає контролювати надходження
+                        продуктів і стан складських запасів.
+                    </p>
+
+                    <ul class="duties">
+                        <li>Перевіряє кількість і стан поставок.</li>
+                        <li>Контролює терміни придатності.</li>
+                        <li>Стежить за умовами зберігання.</li>
+                        <li>Допомагає вести облік залишків.</li>
+                    </ul>
+                </article>
+
+                <article class="team-card">
+                    <div class="number">06 / ЧИСТОТА</div>
+                    <h3>Працівник мийної зони</h3>
+                    <div class="role">Чистий інвентар та посуд</div>
+
+                    <p>
+                        Забезпечує миття й обробку посуду, кухонного
+                        інвентарю та підтримання чистоти визначених зон.
+                    </p>
+
+                    <ul class="duties">
+                        <li>Миє посуд та інвентар за встановленим порядком.</li>
+                        <li>Використовує відповідні засоби для миття.</li>
+                        <li>Розділяє чисті й брудні потоки інвентарю.</li>
+                        <li>Дотримується правил безпеки та гігієни.</li>
+                    </ul>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="section workflow" id="workflow">
+            <div class="section-heading">
+                <div class="section-label">Робота як єдина система</div>
+                <h2>Як команда працює протягом зміни?</h2>
+
+                <p>
+                    Робота починається задовго до першого замовлення.
+                    Кожен етап готує кухню до наступного.
+                </p>
+            </div>
+
+            <div class="steps">
+
+                <div class="step">
+                    <span>ЕТАП 01</span>
+                    <h3>Підготовка</h3>
+                    <p>
+                        Перевірка робочих місць, обладнання,
+                        продуктів і необхідних заготовок.
+                    </p>
+                </div>
+
+                <div class="step">
+                    <span>ЕТАП 02</span>
+                    <h3>Приймання замовлень</h3>
+                    <p>
+                        Команда отримує замовлення та розподіляє
+                        завдання між відповідними станціями.
+                    </p>
+                </div>
+
+                <div class="step">
+                    <span>ЕТАП 03</span>
+                    <h3>Приготування</h3>
+                    <p>
+                        Кухарі працюють паралельно, координують
+                        час і дотримуються технології приготування.
+                    </p>
+                </div>
+
+                <div class="step">
+                    <span>ЕТАП 04</span>
+                    <h3>Контроль і подача</h3>
+                    <p>
+                        Перевірка готовності, зовнішнього вигляду
+                        та відповідності замовленню перед подачею.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="note">
+                <strong>Важливо:</strong>
+                конкретний розподіл обов'язків залежить від розміру
+                ресторану, його меню та організації роботи.
+                За безпечність харчових продуктів відповідає оператор
+                ринку харчових продуктів, а обов'язки працівників
+                визначаються внутрішніми процедурами закладу.
+            </div>
+        </section>
+
+        <section class="section" id="qualities">
+
+            <div class="section-heading">
+                <div class="section-label">Професійний підхід</div>
+                <h2>Що об'єднує хорошу команду?</h2>
+
+                <p>
+                    Навіть найкраще обладнання не замінить відповідальних
+                    працівників, які вміють співпрацювати та дотримуватися
+                    спільних правил.
+                </p>
+            </div>
+
+            <div class="qualities">
+
+                <div class="quality">
+                    <h3>Дисципліна</h3>
+                    <p>
+                        Дотримання технологічних карт, графіків,
+                        інструкцій і правил безпеки.
+                    </p>
+                </div>
+
+                <div class="quality">
+                    <h3>Комунікація</h3>
+                    <p>
+                        Чіткі повідомлення між кухарями та залом
+                        допомагають уникати помилок і затримок.
+                    </p>
+                </div>
+
+                <div class="quality">
+                    <h3>Відповідальність</h3>
+                    <p>
+                        Кожен працівник дбає про якість своєї роботи,
+                        чистоту й безпеку продуктів.
+                    </p>
+                </div>
+
+            </div>
+
+            <a href="index.html" class="back-link">
+                ← Повернутися на головну сторінку
+            </a>
+
+        </section>
+
+        <section class="closing">
+            <div>
+                <h2>Команда — це лише початок</h2>
+                <p>
+                    Тепер розгляньмо, як організувати робочий процес,
+                    щоб кухня працювала злагоджено навіть у години пік.
+                </p>
+            </div>
+
+            <a href="workflow.html" class="button">
+                РОБОЧІ ПРОЦЕСИ →
+            </a>
+        </section>
+
+    </main>
+
+    <footer>
+        <strong>КУХНЯ ЗСЕРЕДИНИ</strong>
+        <p>Навчальний проєкт про світ професійної кухні · 2026</p>
+    </footer>
+
+</body>
+</html>

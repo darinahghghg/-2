@@ -1,0 +1,663 @@
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Санітарія та гігієна — Кухня зсередини</title>
+
+<style>
+:root {
+    --navy: #142b3b;
+    --red: #853b42;
+    --olive: #85885c;
+    --cream: #f5f3ed;
+    --white: #ffffff;
+    --text: #30383d;
+    --muted: #697071;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.7;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.top-line {
+    height: 5px;
+    background: linear-gradient(
+        to right,
+        var(--red) 0 35%,
+        var(--olive) 35% 65%,
+        var(--navy) 65% 100%
+    );
+}
+
+header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 20px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    line-height: 1.3;
+}
+
+.logo span {
+    display: block;
+    color: #b9bd91;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    margin-top: 5px;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+nav a {
+    color: #e1e6e8;
+    font-size: 12px;
+}
+
+nav a:hover,
+nav a.active {
+    color: #c1c59b;
+}
+
+.hero {
+    padding: 65px 8% 75px;
+    background:
+        radial-gradient(
+            ellipse at 90% 10%,
+            rgba(133,136,92,.18),
+            transparent 40%
+        ),
+        var(--cream);
+}
+
+.breadcrumb {
+    color: #7a7e78;
+    font-size: 12px;
+    margin-bottom: 35px;
+}
+
+.breadcrumb a { color: var(--red); }
+
+.eyebrow {
+    color: var(--red);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 18px;
+}
+
+h1 {
+    color: var(--navy);
+    font-size: clamp(38px, 6vw, 68px);
+    line-height: 1.1;
+    letter-spacing: -2px;
+    max-width: 850px;
+    margin-bottom: 24px;
+}
+
+h1 span { color: var(--red); }
+
+.hero-description {
+    max-width: 660px;
+    color: #62696b;
+    font-size: 16px;
+    line-height: 1.9;
+    margin-bottom: 30px;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.button {
+    display: inline-block;
+    padding: 13px 22px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: .2s;
+}
+
+.button-primary {
+    background: var(--red);
+    color: white;
+}
+
+.button-primary:hover { background: var(--navy); }
+
+.button-secondary {
+    border: 1px solid #c7c8bd;
+    color: var(--navy);
+}
+
+.button-secondary:hover { background: #e9e8de; }
+
+.info-strip {
+    background: var(--navy);
+    color: white;
+    padding: 28px 8%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.info-item {
+    padding-left: 16px;
+    border-left: 2px solid var(--olive);
+}
+
+.info-item strong {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.info-item p {
+    color: #c3ccd1;
+    font-size: 12px;
+}
+
+.section { padding: 75px 8%; }
+
+.section-heading {
+    max-width: 680px;
+    margin-bottom: 38px;
+}
+
+.section-label {
+    color: var(--olive);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+}
+
+h2 {
+    color: var(--navy);
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1.25;
+    margin-bottom: 15px;
+}
+
+.section-heading p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    padding: 28px;
+    border: 1px solid #e6e4da;
+    transition: .25s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    border-color: var(--olive);
+}
+
+.card-number {
+    color: var(--red);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.card h3 {
+    color: var(--navy);
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+.dark-section {
+    background: var(--navy);
+    color: white;
+}
+
+.dark-section h2 { color: white; }
+
+.dark-section .section-heading p { color: #c3ccd1; }
+
+.dark-section .section-label { color: #b9bd91; }
+
+.rules {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.rule {
+    border: 1px solid rgba(255,255,255,.18);
+    padding: 23px;
+}
+
+.rule h3 {
+    color: #c1c59b;
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+.rule p {
+    color: #d0d7db;
+    font-size: 12px;
+    line-height: 1.9;
+}
+
+.checklist {
+    list-style: none;
+    margin-top: 25px;
+}
+
+.checklist li {
+    background: white;
+    padding: 13px 16px 13px 40px;
+    margin-bottom: 8px;
+    position: relative;
+    font-size: 13px;
+    color: #4c5557;
+}
+
+.checklist li::before {
+    content: "✓";
+    position: absolute;
+    left: 16px;
+    color: var(--olive);
+    font-weight: bold;
+}
+
+.notice {
+    margin-top: 28px;
+    padding: 20px 23px;
+    background: white;
+    border-left: 3px solid var(--red);
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.notice strong { color: var(--navy); }
+
+.closing {
+    background: var(--red);
+    color: white;
+    padding: 55px 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.closing h2 {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.closing p {
+    color: #f0dfe0;
+    font-size: 13px;
+    max-width: 560px;
+}
+
+.closing .button {
+    border: 1px solid rgba(255,255,255,.7);
+    white-space: nowrap;
+}
+
+.closing .button:hover {
+    background: white;
+    color: var(--red);
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 28px;
+    color: var(--red);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+footer {
+    background: var(--navy);
+    color: #c3ccd1;
+    padding: 24px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    font-size: 11px;
+}
+
+footer strong {
+    color: white;
+    letter-spacing: 2px;
+}
+
+@media (max-width: 760px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .info-strip,
+    .rules,
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .closing,
+    footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-line"></div>
+
+<header>
+    <a href="index.html" class="logo">
+        КУХНЯ ЗСЕРЕДИНИ
+        <span>ПРОФЕСІЯ • ПОРЯДОК • СМАК</span>
+    </a>
+
+    <nav>
+        <a href="index.html">Головна</a>
+        <a href="team.html">Хто на кухні?</a>
+        <a href="workflow.html">Робочі процеси</a>
+        <a href="sanitation.html" class="active">Санітарія</a>
+    </nav>
+</header>
+
+<main>
+
+<section class="hero" id="home">
+    <div class="breadcrumb">
+        <a href="index.html">Головна</a> / Санітарія та гігієна
+    </div>
+
+    <div class="eyebrow">03 / Безпека харчових продуктів</div>
+
+    <h1>
+        Чистота — це не деталь.<br>
+        <span>Це стандарт роботи.</span>
+    </h1>
+
+    <p class="hero-description">
+        На професійній кухні чистота та безпека продуктів
+        є частиною кожного робочого процесу. Особиста гігієна,
+        правильне зберігання сировини, чисте обладнання та
+        дотримання температурних режимів допомагають запобігати
+        забрудненню й захищати здоров'я гостей.
+    </p>
+
+    <div class="buttons">
+        <a href="#rules" class="button button-primary">ОСНОВНІ ПРАВИЛА</a>
+        <a href="#daily" class="button button-secondary">ЩОДЕННИЙ КОНТРОЛЬ</a>
+    </div>
+</section>
+
+<section class="info-strip">
+    <div class="info-item">
+        <strong>Особиста гігієна</strong>
+        <p>Чисті руки, охайний одяг і відповідальна поведінка.</p>
+    </div>
+
+    <div class="info-item">
+        <strong>Безпечні продукти</strong>
+        <p>Правильне зберігання, обробка та контроль температури.</p>
+    </div>
+
+    <div class="info-item">
+        <strong>Чисте обладнання</strong>
+        <p>Систематичне миття та дезінфекція відповідно до процедур.</p>
+    </div>
+</section>
+
+<section class="section" id="rules">
+    <div class="section-heading">
+        <div class="section-label">Основи гігієни</div>
+        <h2>Правила, яких дотримуються щодня</h2>
+        <p>
+            Безпечна кухня працює за чіткими правилами.
+            Вони стосуються працівників, продуктів, обладнання
+            та всього робочого середовища.
+        </p>
+    </div>
+
+    <div class="cards">
+        <article class="card">
+            <div class="card-number">01 / ПЕРСОНАЛ</div>
+            <h3>Особиста гігієна</h3>
+            <p>
+                Працівники миють руки у відповідних ситуаціях,
+                використовують чистий робочий одяг, підтримують
+                охайність і дотримуються правил щодо прикрас,
+                волосся та інших можливих джерел забруднення.
+                За наявності симптомів хвороби, які можуть становити
+                ризик для харчових продуктів, необхідно повідомити
+                відповідальну особу.
+            </p>
+        </article>
+
+        <article class="card">
+            <div class="card-number">02 / ПРОДУКТИ</div>
+            <h3>Правильне зберігання</h3>
+            <p>
+                Продукти зберігають відповідно до встановлених
+                температурних умов і вимог виробника. Сировину
+                та готову їжу розділяють, стежать за маркуванням,
+                термінами придатності та захистом від забруднення.
+            </p>
+        </article>
+
+        <article class="card">
+            <div class="card-number">03 / ОБЛАДНАННЯ</div>
+            <h3>Миття та дезінфекція</h3>
+            <p>
+                Робочі поверхні, ножі, дошки та інвентар очищають
+                за встановленими процедурами. Дезінфекцію проводять
+                відповідними засобами, дотримуючись інструкцій
+                щодо концентрації, часу контакту та безпечного використання.
+            </p>
+        </article>
+
+        <article class="card">
+            <div class="card-number">04 / ЗАПОБІГАННЯ</div>
+            <h3>Захист від перехресного забруднення</h3>
+            <p>
+                Сирі продукти відокремлюють від готових до споживання.
+                Використовують належно очищений інвентар, дотримуються
+                правил роботи з алергенами та не допускають контакту
+                їжі з брудними поверхнями.
+            </p>
+        </article>
+    </div>
+</section>
+
+<section class="section dark-section">
+    <div class="section-heading">
+        <div class="section-label">Система безпеки</div>
+        <h2>Як контролюють безпеку їжі?</h2>
+        <p>
+            У закладах харчування застосовують процедури,
+            засновані на принципах HACCP. Вони допомагають
+            виявляти небезпечні фактори та контролювати ризики
+            на різних етапах роботи з продуктами.
+        </p>
+    </div>
+
+    <div class="rules">
+        <article class="rule">
+            <h3>Контроль температури</h3>
+            <p>
+                Перевірка умов зберігання та приготування
+                відповідно до вимог для конкретних продуктів.
+            </p>
+        </article>
+
+        <article class="rule">
+            <h3>Контроль постачання</h3>
+            <p>
+                Перевірка стану продуктів, умов доставки,
+                маркування та необхідних супровідних документів.
+            </p>
+        </article>
+
+        <article class="rule">
+            <h3>Записи та процедури</h3>
+            <p>
+                Фіксація необхідних перевірок, контрольних заходів
+                і дій у разі виявлення невідповідностей.
+            </p>
+        </article>
+    </div>
+</section>
+
+<section class="section" id="daily">
+    <div class="section-heading">
+        <div class="section-label">Практичний контроль</div>
+        <h2>На що звертають увагу протягом дня?</h2>
+        <p>
+            Конкретний перелік перевірок залежить від меню,
+            обладнання та процедур закладу. Нижче — основні
+            напрямки щоденного контролю.
+        </p>
+    </div>
+
+    <ul class="checklist">
+        <li>Чистота робочих поверхонь та кухонного інвентарю.</li>
+        <li>Наявність мила та засобів для гігієнічного висушування рук.</li>
+        <li>Дотримання умов зберігання продуктів.</li>
+        <li>Маркування заготовок і контроль термінів придатності.</li>
+        <li>Розділення сирих продуктів і готових страв.</li>
+        <li>Належне використання мийних і дезінфекційних засобів.</li>
+        <li>Своєчасне видалення відходів та підтримання чистоти.</li>
+        <li>Виконання встановлених процедур і необхідних записів HACCP.</li>
+    </ul>
+
+    <div class="notice">
+        <strong>Важливо:</strong>
+        цей перелік має ознайомчий характер і не замінює
+        затверджених процедур закладу. Конкретні санітарні вимоги
+        визначаються чинним законодавством, видом діяльності
+        та особливостями харчового виробництва.
+    </div>
+</section>
+
+<section class="section" style="background:#e9e8de;">
+    <div class="section-heading">
+        <div class="section-label">Культура безпеки</div>
+        <h2>Чистота — відповідальність усієї команди</h2>
+        <p>
+            Безпека харчових продуктів не залежить лише від одного
+            працівника. Кожен член команди має виконувати свої
+            обов'язки, повідомляти про проблеми та дотримуватися
+            встановлених процедур.
+        </p>
+    </div>
+
+    <div class="cards">
+        <article class="card">
+            <h3>Не ігнорувати проблему</h3>
+            <p>
+                Якщо виявлено зіпсований продукт, несправне обладнання
+                або порушення умов зберігання, необхідно повідомити
+                відповідальну особу та діяти за встановленою процедурою.
+            </p>
+        </article>
+
+        <article class="card">
+            <h3>Дотримуватися інструкцій</h3>
+            <p>
+                Навчання персоналу, зрозумілі правила та регулярний
+                контроль допомагають підтримувати безпечні умови
+                навіть під час великого навантаження.
+            </p>
+        </article>
+    </div>
+
+    <a href="index.html" style="display:inline-block;margin-top:28px;color:#853b42;font-size:12px;font-weight:700;">
+        ← Повернутися на головну
+    </a>
+</section>
+
+<section class="closing">
+    <div>
+        <h2>Безпека починається з порядку</h2>
+        <p>
+            Тепер ви знаєте основні принципи гігієни професійної кухні.
+            Поверніться до інших розділів, щоб дізнатися більше
+            про команду та організацію робочих процесів.
+        </p>
+    </div>
+
+    <a href="workflow.html" class="button">
+        РОБОЧІ ПРОЦЕСИ →
+    </a>
+</section>
+
+</main>
+
+<footer>
+    <strong>КУХНЯ ЗСЕРЕДИНИ</strong>
+    <p>Навчальний проєкт про світ професійної кухні · 2026</p>
+</footer>
+
+</body>
+</html>
+
+    
+
+     
